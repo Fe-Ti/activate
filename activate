@@ -50,4 +50,4 @@ echo_result
 
 fi
 
-source /home/just-timp/.rvm/scripts/rvm
+source /home/`whoami`/.rvm/scripts/rvm
