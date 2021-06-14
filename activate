@@ -1,0 +1,46 @@
+#!/bin/bash
+
+export GITHUB_USERNAME=`git config --get user.user`
+export GITHUB_EMAIL=`git config --get user.email`
+
+export PATH=${PATH}:/home/`whoami`/${GITHUB_USERNAME}/workspace/node/bin
+
+alias edit=nano
+alias gsed=sed
+
+export e=12
+echo Enter the laboratory work number (or press Return to skip):
+read l
+
+if [ ! -z $l ]
+then
+read prev_lab curr_lab <<< $(seq --separator=, --equal-width $(( $l - 1 )) $e |  awk -F,  '{ print $1" "$2  }')
+
+echo_result()
+{
+    case $? in
+        0)
+            echo "[1A[ ok ]"
+            ;;
+        *)
+            echo "[1A[fail]"
+            ;;
+    esac
+}
+
+echo "[....] Cloning the repo..."
+#git clone --quiet https://github.com/${GITHUB_USERNAME}/lab${prev_lab} projects/lab${curr_lab}
+echo_result
+echo "[....] Going to projects/lab${curr_lab}..."
+cd projects/lab${curr_lab}
+echo_result
+echo "[....] Removing origin..."
+git remote remove origin
+echo_result
+echo "[....] Setting origin..."
+git remote add origin https://github.com/${GITHUB_USERNAME}/lab${curr_lab}
+echo_result
+
+fi
+
+source /home/just-timp/.rvm/scripts/rvm
