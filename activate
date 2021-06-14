@@ -50,4 +50,7 @@ echo_result
 
 fi
 
+if [ -f /home/`whoami`/.rvm/scripts/rvm ]
+then
 source /home/`whoami`/.rvm/scripts/rvm
+fi
