@@ -1,5 +1,12 @@
 #!/bin/bash
-
+#
+# The setup script for labs in discipline "Technologies and Methods of Programming" 
+#
+# Notes:    The "script" should not be used via ./activate.sh
+#           Instead clone the file to scripts/activate.sh and use source command on it
+#       
+#           Also you need to be in the ~/<GH USERNAME>/workspace directory when running this script
+#
 export GITHUB_USERNAME=`git config --get user.user`
 export GITHUB_EMAIL=`git config --get user.email`
 
@@ -29,7 +36,7 @@ echo_result()
 }
 
 echo "[....] Cloning the repo..."
-#git clone --quiet https://github.com/${GITHUB_USERNAME}/lab${prev_lab} projects/lab${curr_lab}
+git clone --quiet https://github.com/${GITHUB_USERNAME}/lab${prev_lab} projects/lab${curr_lab}
 echo_result
 echo "[....] Going to projects/lab${curr_lab}..."
 cd projects/lab${curr_lab}
